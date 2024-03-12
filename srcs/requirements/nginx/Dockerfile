@@ -14,4 +14,4 @@ COPY ./tools/tool.sh .
 RUN	chmod +x tool.sh
 EXPOSE 443
 
-ENTRYPOINT ["sh" "tool.sh"]
+ENTRYPOINT ["sh", "tool.sh"]
