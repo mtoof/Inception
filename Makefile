@@ -1,8 +1,8 @@
 all:up
 
 up:
-	mkdir -p /wordpress_data
-	mkdir -p /mariadb_data
+	mkdir -p /home/mtoof/wordpress_data
+	mkdir -p /home/mtoof/mariadb_data
 	@docker-compose -f srcs/docker-compose.yml up -d --build
 
 down:

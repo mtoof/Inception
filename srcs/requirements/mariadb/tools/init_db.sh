@@ -29,11 +29,11 @@ GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD' WITH 
 GRANT SELECT ON mysql.* TO '$DB_USER'@'%';
 
 # Change the password of the root user for localhost
-ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';
+ALTER USER 'root'@'localhost' IDENTIFIED BY $DB_ROOT_PASSWORD;
 
 # Flush privileges to apply changes
 FLUSH PRIVILEGES
 EOF
 
 # Start MariaDB server with custom configuration file
-exec mysqld --defaults-file=/etc/my.cnf.d/MariaDB.cnf
+exec mysqld --defaults-file=/etc/my.cnf.d/50-server.cnf
