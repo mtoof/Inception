@@ -1,11 +1,9 @@
-version: '3.3'
-
 volumes:
   mariadb_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/mtoof/mariadb_data
+      device: /home/mtoof/data/mariadb_data
       o: bind
   # wordpress_data:
   #   name: wordpress_data
@@ -17,6 +15,7 @@ volumes:
 
 networks:
   inception:
+    name: inception
 
 services:
   # nginx:

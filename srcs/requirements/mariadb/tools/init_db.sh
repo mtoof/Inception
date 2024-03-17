@@ -13,27 +13,21 @@ mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
 
-# Create a new database with provided name and character set
-CREATE DATABASE $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;
+DELETE FROM	mysql.user WHERE User='';
+DROP DATABASE test;
+DELETE FROM mysql.db WHERE Db='test';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 
-# Create a new user with provided credentials
-CREATE USER '$DB_USER'@'%' IDENTIFIED by '$DB_PASSWORD';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';
 
-# Grant all privileges on the newly created database to the user
-GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';
+CREATE DATABASE ${MARIADB_DATABASE} CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER '${MARIADB_USER}'@'%' IDENTIFIED by '${MARIADB_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE}.* TO '${MARIADB_USER}'@'%';
 
-# Grant all privileges globally to the user, allowing them to grant privileges to other users
-GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION;
-
-# Grant SELECT privileges on the MySQL system database to the user
-GRANT SELECT ON mysql.* TO '$DB_USER'@'%';
-
-# Change the password of the root user for localhost
-ALTER USER 'root'@'localhost' IDENTIFIED BY $DB_ROOT_PASSWORD;
 
 # Flush privileges to apply changes
-FLUSH PRIVILEGES
+FLUSH PRIVILEGES;
 EOF
 
 # Start MariaDB server with custom configuration file
-exec mysqld --defaults-file=/etc/my.cnf.d/50-server.cnf
+exec mysqld --defaults-file=/etc/my.cnf.d/mariadb-server.cnf

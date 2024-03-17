@@ -2,8 +2,8 @@ FROM alpine:3.18
 
 RUN apk update && apk add mariadb mariadb-client openrc
 
-COPY ./conf/50-server.cnf /etc/my.cnf.d/50-server.cnf
-RUN chmod 644 /etc/my.cnf.d/50-server.cnf
+COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+RUN chmod 440 /etc/my.cnf.d/mariadb-server.cnf
 
 COPY ./tools/init_db.sh /
 RUN chmod +x init_db.sh
