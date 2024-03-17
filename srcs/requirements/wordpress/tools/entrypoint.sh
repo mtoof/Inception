@@ -6,7 +6,7 @@ cd /var/www/html
 
 rm -rf *
 
-sed -i 's/listen = 127.0.0.1:9000/listen = 127.0.0.1:9000/' /etc/php82/php-fpm.d/www.conf
+sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /etc/php82/php-fpm.d/www.conf
 
 # wget https://wordpress.org/latest.tar.gz
 # tar -xzf latest.tar.gz --strip-components=1
