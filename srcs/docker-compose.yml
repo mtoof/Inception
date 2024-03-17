@@ -5,13 +5,13 @@ volumes:
       type: none
       device: /home/mtoof/data/mariadb_data
       o: bind
-  # wordpress_data:
-  #   name: wordpress_data
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: /wordpress_data
-  #     o: bind
+  wordpress_data:
+    name: wordpress_data
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mtoof/data/wordpress_data
+      o: bind
 
 networks:
   inception:
@@ -32,24 +32,29 @@ services:
   #   env_file: .env
   #   restart: always
   
-  # wordpress:
-  #   container_name: wordpress
-  #   image: wordpress:5.8.2
-  #   environment:
-  #     WORDPRESS_DB_HOST: mariadb
-  #     WORDPRESS_DB_USER: root
-  #     WORDPRESS_DB_PASSWORD: example_password
-  #     WORDPRESS_DB_NAME: wordpress
-  #   depends_on:
-  #     - mariadb
-  #   networks:
-  #     - inception
-  #   volumes:
-  #     - wordpress_data:/var/www/html
+  wordpress:
+    container_name: wordpress
+    image: wordpress:mtoof
+    build: ./requirements/wordpress/.
+    env_file:
+      .env
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
+    command: >
+      sh -c '
+        until docker inspect -f "{{.State.Running}}" mariadb | grep -q "true"; do
+          sleep 10
+        done;
+        echo "MariaDB is now running"
+      '
 
   mariadb:
     container_name: mariadb
-    image: mymariadb
+    image: mariadb:mtoof
     build: ./requirements/mariadb/.
     # environment:
       # MYSQL_ROOT_PASSWORD: example_password

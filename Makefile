@@ -10,6 +10,11 @@ up:
 
 down:
 	@docker compose -f srcs/docker-compose.yml down --volumes --rmi all
+	@if [ -z "$(docker ps -aq)" ]; then \
+  		echo "No containers are currently running or stopped."; \
+	else \
+		docker kill $(docker ps -aq); \
+	fi
 	@docker system prune -f -a --volumes --all
 	@sudo rm -rf /home/mtoof/data
 
