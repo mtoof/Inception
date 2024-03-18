@@ -5,13 +5,15 @@ WORKDIR /
 RUN apk update && \
 apk add nginx && \
 apk add openssl && \
-mkdir -p /run/nginx/ssl && \
-rm -rf /etc/nginx/nginx.conf
+mkdir -p /etc/nginx/ssl
 
+RUN if ! getent group www-data > /dev/bull; then addgroup -S www-data; fi
+RUN adduser -S www-data -G www-data
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ./tools/tool.sh .
 RUN	chmod +x tool.sh
+
 EXPOSE 443
 
 ENTRYPOINT ["sh", "tool.sh"]

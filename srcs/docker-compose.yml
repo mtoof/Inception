@@ -18,26 +18,19 @@ networks:
     name: inception
 
 services:
-  # nginx:
-  #   container_name: nginx
-  #   build: ./requirements/nginx/.
-  #   ports:
-  #     - "443:443"
-  #   volumes:
-  #     - wordpress_data:/var/www/html
-  #   networks:
-  #     - inception
-  #   depends_on:
-  #     - wordpress
-  #   env_file: .env
-    # restart: always
-    # command: >
-    #   sh -c '
-    #     until docker inspect -f "{{.State.Running}}" wordpress | grep -q "true"; do
-    #       sleep 10
-    #     done;
-    #     echo "WordPress is now running"
-    #   '
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    env_file: .env
+    restart: always
   
   wordpress:
     container_name: wordpress
@@ -51,13 +44,6 @@ services:
       - inception
     volumes:
       - wordpress_data:/var/www/html
-    command: >
-      sh -c '
-        until docker inspect -f "{{.State.Running}}" mariadb | grep -q "true"; do
-          sleep 10
-        done;
-        echo "MariaDB is now running"
-      '
     restart: always
 
   mariadb:
