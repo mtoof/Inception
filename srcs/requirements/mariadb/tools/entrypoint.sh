@@ -4,6 +4,8 @@
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld
 chown -R mysql:mysql /var/lib/mysql
+mkdir -p /var/log/mysql
+chown -R mysql:mysql /var/log/mysql
 
 # Initialize MySQL data directory
 mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
@@ -14,14 +16,14 @@ USE mysql;
 FLUSH PRIVILEGES;
 
 DELETE FROM	mysql.user WHERE User='';
-DROP DATABASE test;
+DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test';
 DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';
 
-CREATE DATABASE ${MARIADB_DATABASE} CHARACTER SET utf8 COLLATE utf8_general_ci;
-CREATE USER '${MARIADB_USER}'@'%' IDENTIFIED by '${MARIADB_PASSWORD}';
+CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE} CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED by '${MARIADB_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE}.* TO '${MARIADB_USER}'@'%';
 
 
