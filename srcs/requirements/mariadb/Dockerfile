@@ -10,4 +10,4 @@ RUN chmod +x entrypoint.sh
 
 EXPOSE 3306
 
-CMD ["sh", "entrypoint.sh"]
+ENTRYPOINT ["sh", "entrypoint.sh"]
