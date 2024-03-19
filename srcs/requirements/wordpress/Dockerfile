@@ -8,7 +8,7 @@ RUN adduser -S www-data -G www-data
 
 # Install PHP & MariaDB client dependencies
 RUN apk update && \
-    apk add php82 php82-fpm php82-mysqli fcgi php82-phar wget php82-curl php82-xml php82-gd php-mbstring && \
+    apk add php82 php82-fpm php82-mysqli fcgi php82-phar wget php82-curl php82-xml php82-gd php82-mbstring && \
     apk add mariadb-client
 
 
