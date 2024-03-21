@@ -32,4 +32,4 @@ FLUSH PRIVILEGES;
 EOF
 
 # Start MariaDB server with custom configuration file
-exec mysqld --defaults-file=/etc/my.cnf.d/mariadb-server.cnf
+exec mariadbd
