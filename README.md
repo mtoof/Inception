@@ -45,10 +45,10 @@ This project is about advanced use of docker containers include networks, volume
 │   │       └── tools
 │   │           └── (additional tools/scripts(Wordpress configuration included in the script file))
 |__ Makefile
-## Inception
 
-Refer to the project documentation for more details and examples of the expected result, directory structure, and .env file configuration.
+# How to run the project
+- Clone the repository to your virtual machine.
+- Run the command `make up` to build the images and start the containers.
 
-For security reasons, avoid storing credentials, API keys, or environment variables in public repositories.
-
-**Note**: Please replace placeholders like login, XXXX, wil, etc., with appropriate values as per your setup.
+# How to test the project
+- Open your web browser and go to the domain name you configured in your .env file.
