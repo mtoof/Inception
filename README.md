@@ -23,29 +23,29 @@ This project is about advanced use of docker containers include networks, volume
 - NGINX container should be the only entrypoint via port 443 with TLSv1.2 or TLSv1.3 protocol.
 
 ```
+├── Makefile
 ├── srcs
 │   ├── docker-compose.yml
 │   ├── .env
 │   ├── requirements
-│   │   ├── mariadb
-│   │   │   ├── Dockerfile
-│   │   │   ├── .dockerignore
-│   │   │   ├── conf
-│   │   │   │   └── (configuration files)
-│   │   │   └── tools
-│   │   │       └── (additional tools/scripts)
-│   │   ├── nginx
-│   │   │   ├── Dockerfile
-│   │   │   ├── .dockerignore
-│   │   │   ├── conf
-│   │   │   │   └── (configuration files)
-│   │   │   └── tools
-│   │   │       └── (additional tools/scripts)
-│   │   └── wordpress
-│   │       ├── Dockerfile
-│   │       └── tools
-│   │           └── (additional tools/scripts(Wordpress configuration included in the script file))
-├── Makefile
+│       ├── mariadb
+│       │   ├── Dockerfile
+│       │   ├── .dockerignore
+│       │   ├── conf
+│       │   │   └── (configuration files)
+│       │   └── tools
+│       │       └── (additional tools/scripts)
+│       ├── nginx
+│       │   ├── Dockerfile
+│       │   ├── .dockerignore
+│       │   ├── conf
+│       │   │   └── (configuration files)
+│       │   └── tools
+│       │       └── (additional tools/scripts)
+│       └── wordpress
+│           ├── Dockerfile
+│           └── tools
+│               └── (additional tools/scripts(Wordpress configuration included in the script file))
 ```
 
 # How to run the project
