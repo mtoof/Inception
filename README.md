@@ -22,6 +22,7 @@ This project is about advanced use of docker containers include networks, volume
 - Use a .env file to store environment variables.
 - NGINX container should be the only entrypoint via port 443 with TLSv1.2 or TLSv1.3 protocol.
 
+```
 ├── srcs
 │   ├── docker-compose.yml
 │   ├── .env
@@ -44,7 +45,8 @@ This project is about advanced use of docker containers include networks, volume
 │   │       ├── Dockerfile
 │   │       └── tools
 │   │           └── (additional tools/scripts(Wordpress configuration included in the script file))
-|__ Makefile
+├── Makefile
+```
 
 # How to run the project
 - Clone the repository to your virtual machine.
