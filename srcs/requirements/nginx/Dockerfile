@@ -7,7 +7,7 @@ apk add nginx && \
 apk add openssl && \
 mkdir -p /etc/nginx/ssl
 
-RUN if ! getent group www-data > /dev/bull; then addgroup -S www-data; fi
+RUN if ! getent group www-data > /dev/null; then addgroup -S www-data; fi
 RUN adduser -S www-data -G www-data
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
